@@ -1,8 +1,12 @@
 const searchContainer = $('.search-container');
-const gallery = $('.gallary');
-// const card;
-// const cardImage;
-// const cardInfo;
+const gallary = $('.gallary');
+const card = $('.card');
+const cardImageContainer = $(".card-img-container");
+const cardInfoContainer = $(".card-info-container");
+const cardImg = $(".card-img");
+const cardName = $(".card-name");
+const cardEmail = $("card-text");
+const cardCity = $(".card-text, .cap")
 // const modalContainer;
 // const modalButton;
 // const modal; 
@@ -14,5 +18,8 @@ function searchBox(){
 	$('form').append($('<input>', {type: 'submit', value: '&#x1F50D;',id: "search-submit", class: "search-submit"}));
 }
 
-
-searchContainer.append(searchBox);
+function gallaryMarkup(){
+	gallary.html($('<div>'), {class: 'card'});
+	card.html($('<div>', {class: "card-img-container"}));
+	card.append($('<div>', {class: "card-info-container"}));
+}
