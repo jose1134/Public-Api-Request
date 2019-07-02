@@ -42,17 +42,20 @@ function modalElements(){
 	$("#modal-close-btn").html('<strong>X</strong>');
 	$('.modal-info-container').html($('<img>', {class: "modal-img", src: "https://placehold.it/125x125", alt: 'profile picture'}));
 	$('<h3>', {id: 'name', class: 'modal-name cap'}).insertAfter('.modal-img');
-	$('<p>', {class: 'modal-text cap'}).insertAfter('h3');
 	$('<p>', {class: 'modal-text'}).insertAfter('.modal-name');
-	$('<hr>').insertAfter('p.cap')
-	for (let i = 0; i < 3; i++){
-		$('<p>', {class: 'modal-text'}).insertAfter('hr');
-	}
+
+	// $('<p>', {class: 'modal-text cap'}).insertAfter('img.modal-img');
+	// $('<hr>').insertAfter('.modal-text');
+	// for (let i = 0; i < 3; i++){
+	// 	$('<p>', {class: 'modal-text'}).insertAfter('hr');
+	// }
 	$('.modal-btn-container').html($('<button>', {type: 'button', id: 'modal-prev', class: 'modal-prev btn'}));
 	$('#modal-prev').html('Prev');
 	$('.modal-btn-container').append($('<button>', {type: 'button', id: 'modal-next', class: 'modal-next btn'}));
 	$('#modal-next').html('Next');
 }
 
+formElements();
+galleryElements();
 modalElements();
 
