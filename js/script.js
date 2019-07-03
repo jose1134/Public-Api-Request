@@ -1,19 +1,3 @@
-const searchContainer = $('.search-container');
-const galleryId = $('#gallery');
-const galleryClass = $('.gallary');
-const card = $('.card');
-const cardImageContainer = $(".card-img-container");
-const cardInfoContainer = $(".card-info-container");
-const cardImg = $(".card-img");
-const cardName = $(".card-name");
-const cardEmail = $("card-text");
-const cardCity = $(".card-text, .cap");
-const modalContainer = $(".modal-container");
-const modalCloseButton = $("#modal-close-btn");
-const modalButtonContainer = $(".modal-btn-container");
-const modal = $(".modal");
-const modalInfoContainer = $('.modal-info-container');
-const modalImage = $(".modal-img")
 
 
 function formElements(){
@@ -43,12 +27,11 @@ function modalElements(){
 	$('.modal-info-container').html($('<img>', {class: "modal-img", src: "https://placehold.it/125x125", alt: 'profile picture'}));
 	$('<h3>', {id: 'name', class: 'modal-name cap'}).insertAfter('.modal-img');
 	$('<p>', {class: 'modal-text'}).insertAfter('.modal-name');
-
-	// $('<p>', {class: 'modal-text cap'}).insertAfter('img.modal-img');
-	// $('<hr>').insertAfter('.modal-text');
-	// for (let i = 0; i < 3; i++){
-	// 	$('<p>', {class: 'modal-text'}).insertAfter('hr');
-	// }
+	$('<p>', {class: 'modal-text cap'}).insertAfter('.modal-text');
+	$('.modal-info-container').append($('<hr>'));
+	for (let i = 0; i < 3; i++){
+		$('<p>', {class: 'modal-text'}).insertAfter('hr');
+	}
 	$('.modal-btn-container').html($('<button>', {type: 'button', id: 'modal-prev', class: 'modal-prev btn'}));
 	$('#modal-prev').html('Prev');
 	$('.modal-btn-container').append($('<button>', {type: 'button', id: 'modal-next', class: 'modal-next btn'}));
@@ -58,4 +41,32 @@ function modalElements(){
 formElements();
 galleryElements();
 modalElements();
+
+
+const modalContainer = $('.modal-container');
+modalContainer.hide();
+
+$('.card').click(function(event) {
+	modalContainer.fadeIn('slow');
+});
+$('.modal-close-btn').click(function(event) {
+	modalContainer.fadeOut('slow');
+});
+
+const userUrl = 'https://randomuser.me/api/?results=10';
+
+
+// fetch(userUrl)
+// 	.then((resp) => resp.json())
+// 	.then(function(data){
+		
+		
+
+// 	})
+
+
+
+
+
+
 
