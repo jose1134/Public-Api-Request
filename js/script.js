@@ -56,13 +56,16 @@ $('.modal-close-btn').click(function(event) {
 const userUrl = 'https://randomuser.me/api/?results=10';
 
 
-// fetch(userUrl)
-// 	.then((resp) => resp.json())
-// 	.then(function(data){
+fetch(userUrl)
+	.then((resp) => resp.json())
+	.then(function(data){
 		
 		
 
-// 	})
+	})
+	.catch(function(error){
+		alert('Oh No something went wrong!!'); 
+	})
 
 
 
