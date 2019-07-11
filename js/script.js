@@ -53,19 +53,20 @@ $('.modal-close-btn').click(function(event) {
 	modalContainer.fadeOut('slow');
 });
 
-const userUrl = 'https://randomuser.me/api/?results=10';
+const userUrl = 'https://randomuser.me/api/?results=1';
 
 
 fetch(userUrl)
 	.then((resp) => resp.json())
 	.then(function(data){
-		
+		let users = data.results;
+		return users.map(function(users){
+			$('.card-img').attr('src', users.picture.thumbnail);
+		})
 		
 
 	})
-	.catch(function(error){
-		alert('Oh No something went wrong!!'); 
-	})
+	.catch(error => console.log(error));
 
 
 
