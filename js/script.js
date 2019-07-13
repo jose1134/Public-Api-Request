@@ -12,8 +12,6 @@ function galleryElements(){
 	$('.card').append($('<div>', {class: "card-info-container"}));
 	$(".card-img-container").html($('<img>', {class: 'card-img', src: "https://placehold.it/90x90", alt: "profile picture"}));
 	$(".card-info-container").html($('<h3>', {id: 'name', class: 'card-name cap'}));
-	$(".card-info-container").append($('<p>', {class: 'card-text'}));
-	$(".card-info-container").append($('<p>', {class: 'card-text cap'}));
 	
 }
 
@@ -61,11 +59,21 @@ fetch(userUrl)
 	.then(function(data){
 		let users = data.results;
 		return users.map(function(users){
-			$('.card-img').attr('src', users.picture.thumbnail);
-		})
+			$('.card-img, .modal-img').attr('src', users.picture.large);
+			$('.card-name, .modal-name').html(`${users.name.first} ${users.name.last}`);
+			$('<p>', {class: 'card-text'}).insertAfter(".card-name").html(`${users.email}`);
+			$('<p>', {class: 'card-text cap'}).insertAfter(".card-text").html(`${users.location.city}, ${users.location.state}`);
+			let modalTextClasses = $('p.modal-text');
+			for (let i = 0; i < modalTextClasses.length; i++){
+				modalTextClasses[0].innerHTML = `${users.email}`;
+				modalTextClasses[1].innerHTML = `${users.location.city}`;
+				modalTextClasses[2].innerHTML = `${users.cell}`;
+				modalTextClasses[3].innerHTML = `${users.location.street}, ${users.location.city}, ${users.location.state} ${users.location.postcode}`;
+				modalTextClasses[4].innerHTML = `Birthday: ${users.dob.date}`;
+			}
 		
-
-	})
+		})
+	})	
 	.catch(error => console.log(error));
 
 
