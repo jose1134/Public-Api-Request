@@ -38,7 +38,6 @@ function modalElements(){
 }
 
 formElements();
-galleryElements(10);
 modalElements();
 
 
@@ -46,12 +45,30 @@ modalElements();
 
 const userUrl = 'https://randomuser.me/api/?results=10';
 
+// fetch(userUrl)
+// 	.then((resp) => resp.json())
+// 	.then((response) => {
+// 		if (response.ok){
+// 			return Promise.resolve(response);
+// 		} else {
+// 			return Promise.reject(new Error(response.statusText));
+// 		}	
+// 		 })
+// 	.then(data => data.results.map(person => person))
+// 	.catch(error => console.log(error))
+
+
+
+
+
 
 fetch(userUrl)
 	.then((resp) => resp.json())
+	.then(data => data.results.map(person => person))
 	.then(function(data){
 		let users = data.results;
-			return users.map(function(user){
+			return person.map(function(user){
+				galleryElements(10);
 				$('.card-img, .modal-img').attr('src', user.picture.large);
 				$('.card-name, .modal-name').html(`${user.name.first} ${user.name.last}`);
 				$('<p>', {class: 'card-text'}).insertAfter(".card-name").html(`${user.email}`);
