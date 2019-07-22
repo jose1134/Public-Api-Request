@@ -6,8 +6,8 @@ function formElements(){
 	$('form').append($('<input>', {type: 'submit', value: '&#x1F50D;',id: "search-submit", class: "search-submit"}));
 	
 }
-function galleryElements(numOfBoxes){
-	for (let i = 0; i < numOfBoxes; i++){
+function galleryElements(){
+	for (let i = 0; i < 10; i++){
 	$('#gallery').append($('<div>', {class: 'card'}));
 	$('.card').html($('<div>', {class: "card-img-container"}));
 	$('.card').append($('<div>', {class: "card-info-container"}));
@@ -39,7 +39,7 @@ function modalElements(){
 
 formElements();
 modalElements();
-
+galleryElements();
 
 
 
@@ -64,11 +64,9 @@ const userUrl = 'https://randomuser.me/api/?results=10';
 
 fetch(userUrl)
 	.then((resp) => resp.json())
-	.then(data => data.results.map(person => person))
 	.then(function(data){
 		let users = data.results;
-			return person.map(function(user){
-				galleryElements(10);
+			return users.map(function(user){
 				$('.card-img, .modal-img').attr('src', user.picture.large);
 				$('.card-name, .modal-name').html(`${user.name.first} ${user.name.last}`);
 				$('<p>', {class: 'card-text'}).insertAfter(".card-name").html(`${user.email}`);
