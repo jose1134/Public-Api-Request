@@ -6,8 +6,8 @@ function formElements(){
 	$('form').append($('<input>', {type: 'submit', value: '&#x1F50D;',id: "search-submit", class: "search-submit"}));
 	
 }
-function galleryElements(){
-	for (let i = 0; i < 10; i++){
+function galleryElements(numOfBoxes){
+	for (let i = 0; i < numOfBoxes; i++){
 	$('#gallery').append($('<div>', {class: 'card'}));
 	$('.card').html($('<div>', {class: "card-img-container"}));
 	$('.card').append($('<div>', {class: "card-info-container"}));
@@ -39,50 +39,40 @@ function modalElements(){
 
 formElements();
 modalElements();
-galleryElements();
+galleryElements(10);
 
 
 
-const userUrl = 'https://randomuser.me/api/?results=10';
-
-// fetch(userUrl)
-// 	.then((resp) => resp.json())
-// 	.then((response) => {
-// 		if (response.ok){
-// 			return Promise.resolve(response);
-// 		} else {
-// 			return Promise.reject(new Error(response.statusText));
-// 		}	
-// 		 })
-// 	.then(data => data.results.map(person => person))
-// 	.catch(error => console.log(error))
+const userUrl = 'https://randomuser.me/api/?results=10&nat=us';
 
 
+function fetchAPI(url){
+  return fetch(userUrl)
+    .then((resp) => resp.json())
+    .catch(error => console.log(error))
+}
+
+
+Promise.all([fetchAPI(userUrl)])
+  .then(data => data[0].results)
+  .then(persons => persons.map(person => profiles(person)));
 
 
 
-
-fetch(userUrl)
-	.then((resp) => resp.json())
-	.then(function(data){
-		let users = data.results;
-			return users.map(function(user){
-				$('.card-img, .modal-img').attr('src', user.picture.large);
-				$('.card-name, .modal-name').html(`${user.name.first} ${user.name.last}`);
-				$('<p>', {class: 'card-text'}).insertAfter(".card-name").html(`${user.email}`);
-				$('<p>', {class: 'card-text cap'}).insertAfter(".card-text").html(`${user.location.city}, ${user.location.state}`);
-				let modalTextClasses = $('p.modal-text');
-				for (let i = 0; i < modalTextClasses.length; i++){
-					modalTextClasses[0].innerHTML = `${user.email}`;
-					modalTextClasses[1].innerHTML = `${user.location.city}`;
-					modalTextClasses[2].innerHTML = `${user.cell}`;
-					modalTextClasses[3].innerHTML = `${user.location.street}, ${user.location.city}, ${user.location.state} ${user.location.postcode}`;
-					modalTextClasses[4].innerHTML = `Birthday: ${user.dob.date}`;
-				}
-			})	
-	})	
-	.catch(error => console.log(error));
-
+function profiles(user){
+	$('.card-img, .modal-img').attr('src', user.picture.large);
+	$('.card-name, .modal-name').html(`${user.name.first} ${user.name.last}`);
+	$('<p>', {class: 'card-text'}).insertAfter(".card-name").html(`${user.email}`);
+	$('<p>', {class: 'card-text cap'}).insertAfter(".card-text").html(`${user.location.city}, ${user.location.state}`);
+	let modalTextClasses = $('p.modal-text');
+	for (let i = 0; i < modalTextClasses.length; i++){
+		modalTextClasses[0].innerHTML = `${user.email}`;
+		modalTextClasses[1].innerHTML = `${user.location.city}`;
+		modalTextClasses[2].innerHTML = `${user.cell}`;
+		modalTextClasses[3].innerHTML = `${user.location.street}, ${user.location.city}, ${user.location.state} ${user.location.postcode}`;
+		modalTextClasses[4].innerHTML = `Birthday: ${user.dob.date}`;
+	}
+}
 
 
 const modalContainer = $('.modal-container');
