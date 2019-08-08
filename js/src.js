@@ -26,14 +26,12 @@ function createCards(data){
                         <p class="card-text cap">${employee.location.city}, ${employee.location.state}</p>
                     </div>`;
     gallery.append(cardDiv);
-    $('.card').click(function(event) {
-      modalCards(employee, index);    });
+    cardDiv.addEventListener('click',() => modalCards(employee, index));
   });
-
 
   function modalCards(employee, index){
     const modalContainer = document.createElement('div');
-    const birthdayDate = new Date(employee.dob.date)
+    const birthdayDate = new Date(employee.dob.date);
     modalContainer.className = 'modal-container';
     modalContainer.innerHTML = ` <div class="modal">
                   <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -52,12 +50,50 @@ function createCards(data){
                   <button type="button" id="modal-next" class="modal-next btn">Next</button>
               </div>`;
     gallery.after(modalContainer); 
+
+
+    if (index > 0){
+     }
+      if (index === 0){
+        $('.modal-prev.btn').remove();
+      }
+     
+    if (index <11){
+      }
+
+      if (index === 11){
+        $('.modal-next.btn').remove(); 
+       }
+
     $('.modal-close-btn').click(function(event) {
       $('.modal-container').remove();
     }); 
+
+    function nextButton(){
+      $('.modal-container').remove()
+      modalCards(data[index +1], index+1);
+    }
+
+    function prevButton(){
+      $('.modal-container').remove()
+      modalCards(data[index -1], index-1);
+    }
+
+
+    $('#modal-prev').click(prevButton);
+    $('#modal-next').click(nextButton);
   }
 
 }
+
+
+const searchBar = `<form action="#" method="get">
+                            <input type="search" id="search-input" class="search-input" placeholder="Search...">
+                            <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
+                        </form>`;
+searchContainer.append(searchBar);
+
+
 
 
 
