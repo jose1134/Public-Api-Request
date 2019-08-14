@@ -3,6 +3,7 @@ const gallery = $('#gallery');
 const searchContainer = $('.search-container');
 
 
+
   
 function fetchAPI(url){
   return fetch(url)
@@ -93,11 +94,40 @@ const searchBar = `<form action="#" method="get">
                         </form>`;
 searchContainer.append(searchBar);
 
+const noName = document.createElement('div');
+noName.className = 'no-name'
+noName.innerHTML = 'Sorry No Matches Found...';
+noName.style.fontFamily = "'Courier New', Courier, monospace";
+noName.style.color = "red";
+gallery.append(noName);
+$('.no-name').hide();
 
 
 
 
 
+function searchResults(){
+  const card = document.querySelector('.card');
+  let cardArr = Array.from(card);
+  let searchValue = document.querySelector('#search-input').value
+  let results = [];
+  for (let i = 0; i < cardArr.length; i++){
+    cardArr[i].style.display = 'none';
+    let cardName = document.querySelector('h3')[0].innerHTML.toLowerCase();
+    if(cardName.includes(searchValue)){
+      results.push(card[i]);
+      card[i].style.display = '';
+    }
+  }
+  // if (results.length === 0){
+  //     $('.no-name').show();
+  //     $('.card').hide();
+  //   } else {
+  //     $('.no-name').hide();
+  //   }
+}
 
-
-
+$('.search-submit').on('click', function(event) {
+  // event.preventDefault();
+  searchResults();
+});
